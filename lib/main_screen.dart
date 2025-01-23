@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:proyek_akhir/color.dart';
+import 'package:proyek_akhir/model/category.dart';
+import 'package:proyek_akhir/second_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -67,7 +71,10 @@ class MainScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print("Tombol ditekan");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Screen();
+                      }));
                     },
                     style: ElevatedButton.styleFrom(
                         padding:

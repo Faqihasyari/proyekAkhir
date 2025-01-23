@@ -24,6 +24,6 @@ flutter:
   fonts:
     - family: FunnelDisplay
       fonts:
-        - asset: assets/fonts/FunnelDisplay.ttf
+        - asset: assets/fonts/FunnelDisplay-Regular.ttf
         - asset: assets/fonts/FunnelDisplay-Bold.ttf
           weight: 700 
