@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyek_akhir/color.dart';
+import 'package:proyek_akhir/model/category.dart';
 
 class ThirdScreen extends StatefulWidget {
   const ThirdScreen({super.key});
@@ -22,11 +23,28 @@ class _ThirdScreenState extends State<ThirdScreen> {
   }
 }
 
-class DetaiMobilePage extends StatelessWidget {
+class DetaiMobilePage extends StatefulWidget {
   const DetaiMobilePage({super.key});
 
   @override
+  State<DetaiMobilePage> createState() => _DetaiMobilePageState();
+}
+
+class _DetaiMobilePageState extends State<DetaiMobilePage> {
+  int selectedCategoryIndex = 0;
+
+  String currentImage = kategori[0].image1;
+
+  void switchImage(String newImage) {
+    setState(() {
+      currentImage = newImage;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final selectedCategory = kategori[selectedCategoryIndex];
+
     return Scaffold(
       backgroundColor: primaryColor,
       body: SafeArea(
@@ -58,11 +76,39 @@ class DetaiMobilePage extends StatelessWidget {
                 ],
               ),
             ),
+            Image.asset(
+              currentImage,
+              width: 150,
+              height: 150,
+            ),
+            SizedBox(height: 20),
+            // Tombol untuk mengganti ke bola sepak
+            ElevatedButton(
+              onPressed: () {
+                switchImage(selectedCategory.image1);
+              },
+              child: Text("Tampilkan Bola Sepak"),
+            ),
+            SizedBox(height: 10),
+            // Tombol untuk mengganti ke basket
+            ElevatedButton(
+              onPressed: () {
+                switchImage(selectedCategory.image2);
+              },
+              child: Text("Tampilkan Bola Basket"),
+            ),
+            SizedBox(height: 10),
+            // Tombol untuk mengganti ke bola voli
+            ElevatedButton(
+              onPressed: () {
+                switchImage(selectedCategory.image3);
+              },
+              child: Text("Tampilkan Bola Voli"),
+            ),
           ],
         ),
       ),
     );
-    ;
   }
 }
 
