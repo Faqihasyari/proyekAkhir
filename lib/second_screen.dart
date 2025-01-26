@@ -1,32 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyek_akhir/color.dart';
-import 'package:proyek_akhir/main_screen.dart';
 import 'package:proyek_akhir/model/category.dart';
 import 'package:proyek_akhir/third_screen.dart';
-
-class Screen extends StatelessWidget {
-  const Screen({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constrains) {
-        if (constrains.maxWidth <= 600) {
-          return SecondScreen(
-            category: kategori[0],
-          );
-        } else if (constrains.maxWidth <= 1200) {
-          return Text("Belum ADA");
-        } else {
-          return Text('Sama Belum Ada');
-        }
-      }),
-    );
-  }
-}
 
 class SecondScreen extends StatelessWidget {
   final Category category;
@@ -34,6 +9,8 @@ class SecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         backgroundColor: primaryColor,
@@ -68,7 +45,7 @@ class SecondScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(28),
               child: Text(
-                'PILIH OLAHRAGA YANG SESUAI DENGAN HOBI \n YANG ANDA MINATI',
+                'AYO KITA LIHAT ADA APA SAJA \n JENIS-JENIS OLAHRAGA',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,
@@ -77,65 +54,57 @@ class SecondScreen extends StatelessWidget {
                     color: fontColor),
               ),
             ),
+            SizedBox(
+              height: 70,
+            ),
             Flexible(
-              child: ListView.builder(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 0,
+                ),
                 itemBuilder: (context, index) {
                   final category = kategori[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return ThirdScreen();
-                        }));
-                      },
-                      child: Card(
-                        color: cardColor,
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(18),
-                                  child: Column(
-                                    spacing: 10,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor: primaryColor,
-                                        child: Icon(
-                                          category.icon,
-                                        ),
-                                      ),
-                                      Text(
-                                        category.name,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w900),
-                                      ),
-                                      Text(
-                                        category.description,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )),
-                            Expanded(
-                                child: Image.asset(
-                              category.imageAsset,
-                              height: 80,
-                              width: 80,
-                            ))
-                          ],
-                        ),
+                  return Column(
+                    children: [
+                      Image.asset(
+                        category.imageAsset,
+                        width: screenWidth * 0.1,
+                        height: screenHeight * 0.1,
                       ),
-                    ),
+                    ],
                   );
                 },
-                itemCount: kategori.length,
+                itemCount: 8,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: screenHeight * 0.1),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ThirdScreen();
+                  }));
+                },
+                style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                    backgroundColor: buttonColor),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Let's Go Lihat",
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'FunnelDisplay'),
+                    ),
+                    SizedBox(width: 8),
+                    Icon(
+                      Icons.arrow_right_alt_sharp,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               ),
             )
           ],

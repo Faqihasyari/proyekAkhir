@@ -73,13 +73,15 @@ class MainScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Screen();
+                        return SecondScreen(
+                          category: kategori[0],
+                        );
                       }));
                     },
                     style: ElevatedButton.styleFrom(
                         padding:
                             EdgeInsets.symmetric(horizontal: 50, vertical: 12),
-                        backgroundColor: Colors.black),
+                        backgroundColor: buttonColor),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
